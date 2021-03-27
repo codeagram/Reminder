@@ -86,7 +86,7 @@ def main():
     reminders = get_today(data)
     if len(reminders) > 0:
         tel_id = get_id()
-        url = URLShortner()
+        url = URLShortener()
         tele = Telegram()
         rem_send = send_reminders(url=url, tele=tele, telegram_id=tel_id, reminders=reminders)
         sleep(60)

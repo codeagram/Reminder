@@ -91,8 +91,24 @@ class URLShortner:
         #shortened_url = data["shortLink"]
         #return shortened_url
         return r.text
-"""
 
+
+class URLShortener:
+
+    def __init__(self):
+
+        self.api_key = "YOUR_API_KEY"
+
+    def shorten_url(self, long_url):
+    
+        api_url = f"https://cutt.ly/api/api.php?key={api_key}&short={url}"
+        data = requests.get(api_url).json()["long_url"]
+        if data["status"] == 7:
+            shortened_url = data["shortLink"]
+        
+        return shorten_url
+
+"""
 
 class URLShortner:
 
