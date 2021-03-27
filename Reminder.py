@@ -1,4 +1,4 @@
-from CustomModule import GetFromSheets, Telegram, URLShortner, UpdateSheets
+from CustomModule import GetFromSheets, Telegram, URLShortener, UpdateSheets
 from datetime import date, datetime
 from time import sleep
 
@@ -89,5 +89,4 @@ def main():
         url = URLShortener()
         tele = Telegram()
         rem_send = send_reminders(url=url, tele=tele, telegram_id=tel_id, reminders=reminders)
-        sleep(60)
         re_update(rem_send)

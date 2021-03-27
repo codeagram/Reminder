@@ -75,7 +75,7 @@ class Telegram:
         response = requests.get(base_url)
         return response
 
-
+"""
 class URLShortner:
 
     def __init__(self):
@@ -90,22 +90,20 @@ class URLShortner:
         #shortened_url = data["shortLink"]
         #return shortened_url
         return r.text
+"""
 
+def URLShortener(long_url):
 
-class URLShortener:
+    self.api_key = "e8ddf38a2ef45074c54626588dda833065383"
 
-    def __init__(self):
+    api_url = f"https://cutt.ly/api/api.php?key={self.api_key}&short={long_url}"
+    data = requests.get(api_url).json()["url"]
+    if data["status"] == 7:
+        shortened_url = data["shortLink"]
+    else:
+        shortened_url = long_url
 
-        self.api_key = "e8ddf38a2ef45074c54626588dda833065383"
-
-    def shorten_url(self, long_url):
-    
-        api_url = f"https://cutt.ly/api/api.php?key={self.api_key}&short={long_url}"
-        data = requests.get(api_url).json()["url"]
-        if data["status"] == 7:
-            shortened_url = data["shortLink"]
-        
-        return shorten_url
+    return shortened_url
 
 """
 
