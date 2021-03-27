@@ -1,5 +1,6 @@
 from CustomModule import GetFromSheets, Telegram, URLShortner, UpdateSheets
 from datetime import date, datetime
+from time import sleep
 
 
 def open_sheets():
@@ -83,8 +84,10 @@ def main():
 
     data = get_reminders()
     reminders = get_today(data)
-    tel_id = get_id()
-    url = URLShortner()
-    tele = Telegram()
-    rem_send = send_reminders(url=url, tele=tele, telegram_id=tel_id, reminders=reminders)
-    re_update(rem_send)
+    if len(reminders) > 0:
+        tel_id = get_id()
+        url = URLShortner()
+        tele = Telegram()
+        rem_send = send_reminders(url=url, tele=tele, telegram_id=tel_id, reminders=reminders)
+        sleep(60)
+        re_update(rem_send)
