@@ -75,28 +75,12 @@ class Telegram:
         response = requests.get(base_url)
         return response
 
-"""
-class URLShortner:
-
-    def __init__(self):
-
-
-    def shorten_url(self, long_url):
-
-        #api_url = f"https://cutt.ly/api/api.php?key={self.api_key}&short={long_url}"
-        r = requests.get('http://cutt.ly/api/api.php?key={}&stats={}'.format(self.api_key, long_url))
-
-        #data = requests.get(api_url).json()["url"]
-        #shortened_url = data["shortLink"]
-        #return shortened_url
-        return r.text
-"""
 
 def URLShortener(long_url):
 
-    self.api_key = "e8ddf38a2ef45074c54626588dda833065383"
+    api_key = "e8ddf38a2ef45074c54626588dda833065383"
 
-    api_url = f"https://cutt.ly/api/api.php?key={self.api_key}&short={long_url}"
+    api_url = f"https://cutt.ly/api/api.php?key={api_key}&short={long_url}"
     data = requests.get(api_url).json()["url"]
     if data["status"] == 7:
         shortened_url = data["shortLink"]
@@ -104,46 +88,3 @@ def URLShortener(long_url):
         shortened_url = long_url
 
     return shortened_url
-
-"""
-
-class URLShortner:
-
-    def __init__(self):
-
-        self.username = "o_6muh2ef1h3"
-        self.password = "n8eB0e^D9cC^8sa"
-
-    def get_access(self):
-
-        auth_res = requests.post("https://api-ssl.bitly.com/oauth/access_token", auth=(self.username, self.password))
-        if auth_res.status_code == 200:
-        # if response is OK, get the access token
-            access_token = auth_res.content.decode()
-        else:
-            print("[!] Cannot get access token, exiting...")
-            exit()
-
-        return access_token
-
-    def shorten_url(self, long_url):
-
-        access_token = self.get_access()
-
-        # construct the request headers with authorization
-        headers = {"Authorization": f"Bearer {access_token}"}
-
-        # get the group UID associated with our account
-        groups_res = requests.get("https://api-ssl.bitly.com/v4/groups", headers=headers)
-        if groups_res.status_code == 200:
-            # if response is OK, get the GUID
-            groups_data = groups_res.json()['groups'][0]
-            guid = groups_data['guid']
-
-        shorten_res = requests.post("https://api-ssl.bitly.com/v4/shorten", json={"group_guid": guid, "long_url": long_url}, headers=headers)
-        if shorten_res.status_code == 200:
-            # if response is OK, get the shortened URL
-            link = shorten_res.json().get("link")
-
-        return link
-    """
