@@ -88,6 +88,3 @@ def main():
     tele = Telegram()
     rem_send = send_reminders(url=url, tele=tele, telegram_id=tel_id, reminders=reminders)
     re_update(rem_send)
-
-if __name__ == '__main__':
-    main()
