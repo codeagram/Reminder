@@ -55,12 +55,13 @@ def send_reminders(url, tele, telegram_id, reminders):
     for rem in reminders:
         name = rem[1]
         remind_name = rem[2]
+        users = remind_name.split(",")
         content = rem[3]
         if remind_name in telegram_id:
-            short = url.shorten_url(url)
-            message = f"Reminder from {name} Regarding \"{content}\".Use \"{short}\" link to reschedule your reminder."
-            tele.send_message(int(telegram_id[remind_name]), message)
-            reminders_send.append(rem)
+            for remindeer in users:
+                message = f"Reminder from {name} Regarding \"{content}\".Use \"{url}\" link to reschedule your reminder."
+                tele.send_message(int(telegram_id[remindeer]), message)
+                reminders_send.append(rem)
 
     return reminders_send
 
@@ -77,14 +78,14 @@ def re_update(reminders_send):
         S_ID = row[6]
         for count in data_row:
             if count == S_ID:
-                B.update_cell(f"H{i+1}", "SEND")
+                #B.update_cell(f"H{i+1}", "SEND")
+                B.delete_rows(int(S_ID) + 1)
             i+=1
 
 def main():
 
     data = get_reminders()
     reminders = get_today(data)
-    print(reminders)
     if len(reminders) > 0:
         tel_id = get_id()
         long_url = reminders[0][5]

@@ -62,6 +62,10 @@ class UpdateSheets:
 
         self.worksheet.update(cell_no, cell_value)
 
+    def delete_rows(self, row_no):
+
+        self.worksheet.delete_row(row_no)
+
 
 class Telegram:
 
