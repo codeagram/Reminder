@@ -71,11 +71,11 @@ class Telegram:
 
     def __init__(self):
 
-        self.url = "https://api.telegram.org/bot1347792998:AAGpgNdhA3-teAuTZSuoyMTv51OoPlHs5GQ"
+        self.url = "https://api.telegram.org/bot1770514264:AAFfu4-CEYiXi1vHPdtGihN2O-mGb_rcY40"
 
     def send_message(self, chat_id, message):
 
-        base_url = f"{self.url}/sendMessage?chat_id={chat_id}&text={message}"
+        base_url = f"{self.url}/sendMessage?chat_id={chat_id}&text={message}&disable_web_page_preview=True"
         response = requests.get(base_url)
         return response
 
