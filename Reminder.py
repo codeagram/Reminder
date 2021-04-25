@@ -58,7 +58,7 @@ def send_reminders(url, tele, telegram_id, reminders):
         users = remind_name.split(",")
         content = rem[3]
         if remind_name in telegram_id:
-            for remindeer in users:
+            for remindeer.strip() in users:
                 message = f"Reminder from {name} Regarding \"{content}\".Use \"{url}\" link to reschedule your reminder."
                 tele.send_message(int(telegram_id[remindeer]), message)
                 reminders_send.append(rem)
