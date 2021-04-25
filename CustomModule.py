@@ -6,7 +6,7 @@ class GetFromSheets:
     def __init__(self, key):
 
         self.key = key
-        self.sheet = gspread.service_account().open_by_key(self.key)
+        self.sheet = gspread.service_account(filename="service_account.json").open_by_key(self.key)
 
     def get_worksheet(self, worksheet_no):
 
