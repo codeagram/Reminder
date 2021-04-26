@@ -48,7 +48,7 @@ def get_id():
     return telegram_id_dict
 
 
-def send_reminders(url, tele, telegram_id, reminders):
+def send_reminders(tele, telegram_id, reminders):
 
 
     reminders_send = []
@@ -56,8 +56,9 @@ def send_reminders(url, tele, telegram_id, reminders):
         name = rem[1]
         remind_name = rem[2]
         content = rem[3]
+        url = rem[5]
         if remind_name in telegram_id:
-            short = url.shorten_url(url)
+            short = URLShortener(url)
             message = f"Reminder from {name} Regarding \"{content}\".Use \"{short}\" link to reschedule your reminder."
             tele.send_message(int(telegram_id[remind_name]), message)
             reminders_send.append(rem)
@@ -84,11 +85,8 @@ def main():
 
     data = get_reminders()
     reminders = get_today(data)
-    print(reminders)
     if len(reminders) > 0:
         tel_id = get_id()
-        long_url = reminders[0][5]
-        url = URLShortener(long_url)
         tele = Telegram()
-        rem_send = send_reminders(url=url, tele=tele, telegram_id=tel_id, reminders=reminders)
+        rem_send = send_reminders(tele=tele, telegram_id=tel_id, reminders=reminders)
         re_update(rem_send)
