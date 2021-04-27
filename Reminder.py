@@ -1,6 +1,5 @@
 from CustomModule import GetFromSheets, Telegram, URLShortener, UpdateSheets
-from datetime import date, datetime
-from time import sleep
+from datetime import datetime
 
 
 def open_sheets():
@@ -9,6 +8,7 @@ def open_sheets():
     sheet = GetFromSheets(key)
 
     return sheet
+
 
 def get_reminders():
 
@@ -25,7 +25,7 @@ def get_today(data):
 
     del data[0]
     for rem in data:
-        remind_datetime = datetime.strptime(rem[4], '%m/%d/%Y %H:%M:%S')
+        remind_datetime = datetime.strptime(rem[4], "%m/%d/%Y %H:%M:%S")
         if remind_datetime <= current_time:
             if rem[7] != "SEND":
                 reminders.append(rem)
@@ -50,24 +50,19 @@ def get_id():
 
 def send_reminders(tele, telegram_id, reminders):
 
-
     reminders_send = []
     for rem in reminders:
         name = rem[1]
         remind_name = rem[2]
         users = remind_name.split(",")
-        print(users)
         content = rem[3]
         url = rem[5]
 
         for remindeer in users:
             reminderer = remindeer.strip()
             if reminderer in telegram_id:
-                print(remindeer)
-                #reminderer = remindeer.strip()
                 short = URLShortener(url)
-                print(short)
-                message = f"Reminder from {name} Regarding \"{content}\".Use \"{short}\" link to reschedule your reminder."
+                message = f'Reminder from {name} Regarding "{content}".Use "{short}" link to reschedule your reminder.'
                 tele.send_message(int(telegram_id[reminderer]), message)
                 reminders_send.append(rem)
 
@@ -86,9 +81,10 @@ def re_update(reminders_send):
         S_ID = row[6]
         for count in data_row:
             if count == S_ID:
-                #B.update_cell(f"H{i+1}", "SEND")
+                # B.update_cell(f"H{i+1}", "SEND")
                 B.delete_rows(int(S_ID) + 1)
-            i+=1
+            i += 1
+
 
 def main():
 
